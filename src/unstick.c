@@ -6,7 +6,12 @@
 
 #define NELEMS(x) (sizeof(x) / sizeof(*(x)))
 
-int main(void) {
+int main(const int argc, const char * const argv[]) {
+  if (argc < 2) {
+    fputs("Usage: unstick PROGRAM [...ARGS])", stderr);
+    return 1;
+  }
+
   scmp_filter_ctx ctx = seccomp_init(SCMP_ACT_ALLOW);
   if (!ctx) {
     perror("Could not set up seccomp context");
@@ -38,8 +43,10 @@ int main(void) {
     goto error;
   }
 
-  seccomp_release(ctx);
-  return 0;
+  execvp(argv[1], argv + 1);
+
+  // exec* only returns on failure
+  perror("Failed to run program");
 
  error:
   seccomp_release(ctx);
