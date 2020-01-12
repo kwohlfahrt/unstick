@@ -3,10 +3,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <unistd.h>
 
 #define NELEMS(x) (sizeof(x) / sizeof(*(x)))
 
-int main(const int argc, const char * const argv[]) {
+int main(const int argc, char * const argv[]) {
   if (argc < 2) {
     fputs("Usage: unstick PROGRAM [...ARGS])", stderr);
     return 1;
