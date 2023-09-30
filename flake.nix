@@ -1,7 +1,7 @@
 {
   description = "Utility to filter out sticky-bit setting";
 
-  inputs.nixpkgs.url = "nixpkgs";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs";
 
   # adapted from https://hoverbear.org/blog/a-flake-for-your-crate/#flake-nix
   outputs = { self, nixpkgs } : let
